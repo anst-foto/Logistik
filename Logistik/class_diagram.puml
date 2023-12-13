@@ -1,0 +1,59 @@
+﻿@startuml
+'https://plantuml.com/class-diagram
+
+interface IPassenger {
+    + {abstract} Boarding() : void
+    + {abstract} UnBoarding() : void
+}
+
+interface ICargo {
+    + {abstract} Load() : void
+    + {abstract} UnLoad() : void
+}
+
+abstract class Transport {
+    - {static} ID : int
+    
+    - id : int
+    - max_speed : int
+    
+    # Transport(max_speed : int)
+    
+    + GetId() : int
+    + GetMaxSpeed() : int
+}
+
+Transport <|-- Bus
+IPassenger <|.. Bus
+class Bus {
+    - place_count : int
+    
+    + Bus(max_speed : int, place_count : int)
+    
+    + GetPlaceCount() : int
+}
+
+Transport <|-- Truck
+ICargo <|.. Truck
+class Truck {
+    - max_weight : int
+    
+    + Truck(max_speed : int, max_weight : int)
+    
+    + GetMaxWeight() : int
+}
+
+Transport <--o LogisticCompany
+class LogisticCompany{
+    - transports : Transport[]
+    
+    + LogisticCompany()
+    
+    + FindTransport(id : int) : Transport
+    + GetTransports() : Transport[]
+    
+    + GetPassengerTransports() : int
+    + GetCargoTransports() : int
+}
+
+@enduml
