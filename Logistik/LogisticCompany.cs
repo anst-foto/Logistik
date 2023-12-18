@@ -29,7 +29,7 @@ public class LogisticCompany
 
     public IEnumerable<Transport> GetTransports() => _transports;
 
-    public IEnumerable<Transport> GetPassengerTransports()
+    public IEnumerable<Transport>? GetPassengerTransports()
     {
         var result = new List<Transport>();
         foreach (var transport in _transports)
@@ -39,11 +39,10 @@ public class LogisticCompany
                 result.Add(transport);
             }
         }
-
-        return result;
+        return result.Count == 0 ? null : result;
     }
     
-    public IEnumerable<Transport> GetCargoTransports()
+    public IEnumerable<Transport>? GetCargoTransports()
     {
         foreach (var transport in _transports)
         {

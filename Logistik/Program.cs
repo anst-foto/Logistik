@@ -7,21 +7,37 @@ var bus2 = new Bus(150, 10);
 
 var truck = new Truck(100, 10000);
 
-company.AddTransport(bus2); 
-company.AddTransport(truck); 
+company.AddTransport(bus2);
+company.AddTransport(truck);
 company.AddTransport(bus1);
 
-foreach (var transport in company.GetTransports())
+var user = new User()
 {
-    PrintTransport(transport);
+    Name = "User"
+};
+
+var trucks = company.GetCargoTransports()?.ToList();
+if (trucks == null) return;
+
+foreach (var t in trucks)
+{
+    PrintTransport(t);
 }
+
+var orderTruck = new Order()
+{
+    Transport = company.FindTransport(trucks[0].Id),
+    User = user
+};
+Console.WriteLine($"{orderTruck.User.Name}: {orderTruck.Transport.Id}");
+
 
 return;
 
 void PrintTransport(Transport transport)
 {
     Console.Write($"[{transport.Id}]: <{transport.GetType().Name}> max_speed = {transport.MaxSpeed} ");
-    
+
     /*if (transport is IPassenger passenger)
     {
         PrintPassenger(passenger);
@@ -31,7 +47,7 @@ void PrintTransport(Transport transport)
     {
         PrintCargo(cargo);
     }*/
-    
+
     switch (transport)
     {
         case IPassenger passenger:
