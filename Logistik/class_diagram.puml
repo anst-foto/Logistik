@@ -52,8 +52,8 @@ class LogisticCompany{
     + FindTransport(id : int) : Transport
     + GetTransports() : Transport[]
     
-    + GetPassengerTransports() : int
-    + GetCargoTransports() : int
+    + GetPassengerTransports() : Transport[]
+    + GetCargoTransports() : Transport[]
 }
 
 @enduml

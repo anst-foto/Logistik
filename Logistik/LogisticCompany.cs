@@ -29,31 +29,28 @@ public class LogisticCompany
 
     public IEnumerable<Transport> GetTransports() => _transports;
 
-    public int GetPassengerTransports()
+    public IEnumerable<Transport> GetPassengerTransports()
     {
-        int sum = 0;
+        var result = new List<Transport>();
         foreach (var transport in _transports)
         {
             if (transport is IPassenger)
             {
-                sum += 1;
+                result.Add(transport);
             }
         }
 
-        return sum;
+        return result;
     }
     
-    public int GetCargoTransports()
+    public IEnumerable<Transport> GetCargoTransports()
     {
-        int sum = 0;
         foreach (var transport in _transports)
         {
             if (transport is ICargo)
             {
-                sum += 1;
+                yield return transport;
             }
         }
-
-        return sum;
     }
 }
